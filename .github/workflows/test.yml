@@ -1,6 +1,13 @@
 name: Test
 
+<<<<<<< HEAD
 on: [push, pull_request]
+=======
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+>>>>>>> 551e6d3f43e53d1b56381e2b4e8131d504acf43e
 
 jobs:
   test:
