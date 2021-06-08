@@ -1,11 +1,6 @@
 name: Build
 
-  push:
-    branches: 
-      - master
-  pull_request:
-    branches: 
-      - master
+on: [push, pull_request]
 
 jobs:
   test:
