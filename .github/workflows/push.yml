@@ -21,9 +21,6 @@ jobs:
         run: ./app.sh test $RELEASE_VERSION
 
       - name: Push docker image
-      	env:
-          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run: |
-          docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+          docker login -u=${{secrets.DOCKER_USERNAME}} -p=${{secrets.DOCKER_PASSWORD}}
           ./app.sh test $RELEASE_VERSION
