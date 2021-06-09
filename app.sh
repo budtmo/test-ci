@@ -3,40 +3,47 @@
 IMAGE="budtmo/docker-vim"
 
 if [ -z "$1" ]; then
-    read -p "Task (test|build|push|all) : " TASK
+    read -p "Task (test|build|push) : " TASK
 else
     TASK=$1
 fi
 
-function test() {
-	echo "test Dockerfile - TODO"
-}
+if [ -z "$2" ]; then
+    read -p "Version : " VER
+else
+    VER=$2
+fi
 
 function build() {
-	docker build -t ${IMAGE} .
+    echo "Build docker image with version \"${VER}\""
+	docker build -t ${IMAGE}:${VER} .
+}
+
+function test() {
+    echo "Test docker image with version \"${VER}\""
+    docker run --rm -v $PWD/tests:/root/tests ${IMAGE}:${VER} bash tests/run-bats.sh
 }
 
 function push() {
-	docker login 
-	docker push ${IMAGE}
+    echo "Push docker image with version \"${VER}\""
+    docker login
+    docker push ${IMAGE}:{VER}
+    docker tag ${IMAGE}:{VER} ${IMAGE}:latest
+    docker push ${IMAGE}:latest
+    
 }
 
 case $TASK in
-    test)
-        test
-    ;;
     build)
         build
+    ;;
+    test)
+        test
     ;;
     push)
         push
     ;;
-    all)
-        test
-        build
-        push
-    ;;
     *)
-        echo "Invalid environment! Valid options: test, build, push, all"
+        echo "Invalid environment! Valid options: test, build, push"
     ;;
 esac

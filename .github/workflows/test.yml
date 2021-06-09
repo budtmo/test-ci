@@ -1,4 +1,4 @@
-name: Test
+name: Build and Test
 
 on: [push, pull_request]
 
@@ -11,8 +11,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Check docker environment
-        run: docker info
+      - name: Build docker image
+        run: ./app.sh build test-container
 
       - name: Test docker image
-        run: ./app.sh test
+        run: ./app.sh test test-container
