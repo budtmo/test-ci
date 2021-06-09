@@ -29,7 +29,6 @@ function push() {
     docker push ${IMAGE}:{VER}
     docker tag ${IMAGE}:{VER} ${IMAGE}:latest
     docker push ${IMAGE}:latest
-    
 }
 
 case $TASK in
