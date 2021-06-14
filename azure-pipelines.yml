@@ -1,9 +1,7 @@
 jobs:
 - job: build_and_test
   trigger:
-    branches:
-      include:
-      - '*'
+    - master
   pool:
     vmImage: ubuntu-20.04
   steps:
@@ -15,9 +13,7 @@ jobs:
 
 - job: build_and_release
   trigger:
-    branches:
-      include:
-      - refs/tags/*
+    - master
   pool:
     vmImage: ubuntu-20.04
   steps:
