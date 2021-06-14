@@ -1,21 +1,17 @@
 jobs:
 - job: build_and_test
-  trigger:
-    - master
   pool:
     vmImage: ubuntu-20.04
   steps:
-  - displayName: 'Build docker image'
-    script: ./app.sh build test-container
+  - script: ./app.sh build test-container
+    displayName: 'Build docker image'
 
-  - displayName: 'Test docker image'
-    script: ./app.sh test test-container
+  - script: ./app.sh test test-container
+    displayName: 'Test docker image'
 
 - job: build_and_release
-  trigger:
-    - master
   pool:
     vmImage: ubuntu-20.04
   steps:
-  - displayName: 'Build docker image'
-    script: ./app.sh build release-image
+  - script: ./app.sh build release-image
+    displayName: 'Build docker image'
