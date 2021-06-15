@@ -1,4 +1,4 @@
-global_variable:
+variables:
   app_version: test
 
 trigger:
