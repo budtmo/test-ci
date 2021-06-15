@@ -3,15 +3,17 @@ trigger:
     include:
     - v*
 
-variables:
-  - name: app_version
-    value: beta
-
 jobs:
 - job: build_and_release
   pool:
     vmImage: ubuntu-20.04
   steps:
+  - script: |
+      latest_tag=$(git describe --tags --abbrev=0)
+      echo "##vso[task.setvariable variable=app_version]$latest_tag"
+
+    displayName: 'Find git tag'
+
   - script: ./app.sh build $(app_version)
     displayName: 'Build docker image'
 
