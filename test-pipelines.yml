@@ -1,3 +1,8 @@
+trigger:
+  branches:
+    include:
+    - '*'
+
 jobs:
 - job: build_and_test
   pool:
@@ -8,10 +13,3 @@ jobs:
 
   - script: ./app.sh test test-container
     displayName: 'Test docker image'
-
-- job: build_and_release
-  pool:
-    vmImage: ubuntu-20.04
-  steps:
-  - script: ./app.sh build release-image
-    displayName: 'Build docker image'

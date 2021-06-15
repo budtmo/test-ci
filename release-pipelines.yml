@@ -1,0 +1,12 @@
+trigger:
+  branches:
+    include:
+    - refs/tags/
+
+jobs:
+- job: build_and_release
+  pool:
+    vmImage: ubuntu-20.04
+  steps:
+  - script: ./app.sh build test-container
+    displayName: 'Build docker image'
