@@ -2,8 +2,10 @@ trigger:
   branches:
     include:
     - master
-    pr:
-    - master
+pr:
+  branches:
+    include:
+    - '*'
 
 jobs:
 - job: build_and_test
