@@ -1,5 +1,6 @@
 variables:
-  app_version: test
+  - name: app_version
+    value: test
 
 trigger:
   branches:
