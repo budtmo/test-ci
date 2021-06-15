@@ -16,7 +16,7 @@ jobs:
     displayName: 'Build docker image'
 
   - script: |
-      docker login -u $(DOCKER_USERNAME) -p=$(variables.DOCKER_PASSWORD)
+      docker login -u $(DOCKER_USERNAME) -p=$(DOCKER_PASSWORD)
       ./app.sh push $(app_version)
 
     displayName: 'Push docker image'
