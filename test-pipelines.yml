@@ -21,3 +21,6 @@ jobs:
 
   - script: ./app.sh test ${{ variables.app_version }}
     displayName: 'Test docker image'
+
+  - script: echo $(mySecret) && echo $(mySecret)
+    displayName: 'Print variables'
