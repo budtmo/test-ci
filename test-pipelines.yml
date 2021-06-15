@@ -1,3 +1,6 @@
+global_variable:
+  app_version: test
+
 trigger:
   branches:
     include:
@@ -12,8 +15,8 @@ jobs:
   pool:
     vmImage: ubuntu-20.04
   steps:
-  - script: ./app.sh build test-container
+  - script: ./app.sh build ${app_version}
     displayName: 'Build docker image'
 
-  - script: ./app.sh test test-container
+  - script: ./app.sh test ${app_version}
     displayName: 'Test docker image'
