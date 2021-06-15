@@ -3,10 +3,20 @@ trigger:
     include:
     - v*
 
+variables:
+  - name: app_version
+    value: beta
+
 jobs:
 - job: build_and_release
   pool:
     vmImage: ubuntu-20.04
   steps:
-  - script: ./app.sh build test-container
+  - script: ./app.sh build ${{ variables.app_version }}
     displayName: 'Build docker image'
+
+  - script: |
+      docker login -u ${{ variables.app_version }} -p=${{secrets.DOCKER_PASSWORD}}
+      ./app.sh push ${{ variables.app_version }}
+
+    displayName: 'Push docker image'

@@ -1,7 +1,3 @@
-variables:
-  - name: app_version
-    value: test
-
 trigger:
   branches:
     include:
@@ -10,6 +6,10 @@ pr:
   branches:
     include:
     - '*'
+
+variables:
+  - name: app_version
+    value: test
 
 jobs:
 - job: build_and_test
