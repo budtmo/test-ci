@@ -12,11 +12,11 @@ jobs:
   pool:
     vmImage: ubuntu-20.04
   steps:
-  - script: ./app.sh build ${{ variables.app_version }}
+  - script: ./app.sh build $(app_version)
     displayName: 'Build docker image'
 
   - script: |
-      docker login -u ${{ variables.DOCKER_USERNAME }} -p=${{variables.DOCKER_PASSWORD}}
-      ./app.sh push ${{ variables.app_version }}
+      docker login -u $(DOCKER_USERNAME) -p=$(variables.DOCKER_PASSWORD)
+      ./app.sh push $(app_version)
 
     displayName: 'Push docker image'

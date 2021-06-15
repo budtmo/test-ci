@@ -16,10 +16,10 @@ jobs:
   pool:
     vmImage: ubuntu-20.04
   steps:
-  - script: ./app.sh build ${{ variables.app_version }}
+  - script: ./app.sh build $(app_version)
     displayName: 'Build docker image'
 
-  - script: ./app.sh test ${{ variables.app_version }}
+  - script: ./app.sh test $(app_version)
     displayName: 'Test docker image'
 
   - script: echo $(myvar1) && echo $(secretvar1)
