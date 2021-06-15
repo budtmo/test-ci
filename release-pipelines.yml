@@ -16,7 +16,7 @@ jobs:
     displayName: 'Build docker image'
 
   - script: |
-      docker login -u ${{ variables.app_version }} -p=${{secrets.DOCKER_PASSWORD}}
+      docker login -u ${{ variables.DOCKER_USERNAME }} -p=${{variables.DOCKER_PASSWORD}}
       ./app.sh push ${{ variables.app_version }}
 
     displayName: 'Push docker image'
