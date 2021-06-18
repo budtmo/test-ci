@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
     - master
+
 pr:
   branches:
     include:
@@ -15,11 +16,20 @@ jobs:
 - job: build_and_test
   pool:
     vmImage: ubuntu-20.04
+  strategy:
+    maxParallel: 3
+    matrix:
+      testContainer:
+        version: test
+      releaseContainer:
+        version: release
+      productionContainer:
+        version: live
   steps:
-  - script: ./app.sh build $(app_version)
+  - script: ./app.sh build $(version)
     displayName: 'Build docker image'
 
-  - script: ./app.sh test $(app_version)
+  - script: ./app.sh test $(version)
     displayName: 'Test docker image'
 
   - script: echo $(myvar1) && echo $(secretvar1)
